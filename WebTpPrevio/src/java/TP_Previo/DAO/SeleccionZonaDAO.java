@@ -21,13 +21,13 @@ public class SeleccionZonaDAO {
             Connection conn = mySQL.getConnection();
             
             //--- Prepara la sentencia para validar el Usuario
-            PreparedStatement guardarSeleccionZona = conn.prepareStatement("INSERT INTO `seleccionzonas` (`id_usuario`, `id_pais`, `id_estado`, `fechaHora`) VALUES (?, ?, ?, ?)");
+            PreparedStatement guardarSeleccionZona = conn.prepareStatement("INSERT INTO `seleccionzonas` (`id_usuario`, `id_pais`, `id_estado`, `fechaHora`) VALUES (?, ?, ?, now())");
             guardarSeleccionZona.setString(1, seleccionZona.getId_usuario());
             guardarSeleccionZona.setString(2, seleccionZona.getId_pais());
             guardarSeleccionZona.setString(3, seleccionZona.getId_estado());
-            Date fechaHora = seleccionZona.getFechaHora();
-            java.sql.Date sqlFechaHora = new java.sql.Date(fechaHora.getTime());
-            guardarSeleccionZona.setDate(4,sqlFechaHora);
+//            Date fechaHora = seleccionZona.getFechaHora();
+//            java.sql.Date sqlFechaHora = new java.sql.Date(fechaHora.getTime());
+//            guardarSeleccionZona.setDate(4,sqlFechaHora);
 
             //--- Ejecuta la sentencia para almacenar datos
             guardarSeleccionZona.execute();
