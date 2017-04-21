@@ -49,7 +49,7 @@ public class MercadoPagoService {
 
             StringBuilder response;
             try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()))) {
+                    new InputStreamReader(conn.getInputStream(),"UTF-8"))) {
                 String inputLine;
                 response = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
@@ -117,7 +117,7 @@ public class MercadoPagoService {
 
             StringBuilder response;
             try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()))) {
+                    new InputStreamReader(conn.getInputStream(),"UTF-8"))) {
                 String inputLine;
                 response = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
@@ -185,7 +185,7 @@ public class MercadoPagoService {
 
             StringBuilder response;
             try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()))) {
+                    new InputStreamReader(conn.getInputStream(),"UTF-8"))) {
                 String inputLine;
                 response = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
