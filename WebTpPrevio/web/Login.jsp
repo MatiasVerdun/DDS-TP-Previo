@@ -26,11 +26,11 @@
   <fieldset style="width:12%;text-align:center;background-color: rgb(245, 245, 245); border-color:#00c8f8;text-align: center; margin:auto">
  	<br>
 	<br>
-    <input placeholder="Usuario" class="form" type="text" name="Usuario" value="" maxlength="15" required>
+    <input placeholder="Usuario" class="form" type="text" name="Usuario" value="" maxlength="15" >
     <br>
     <br>
 	<br>
-    <input placeholder="Contraseña" class="form" type="password" name="Clave" value="" maxlength="15" required>
+    <input placeholder="Contraseña" class="form" type="password" name="Clave" value="" maxlength="15" >
     <br>
 	<br>
 	<br>
