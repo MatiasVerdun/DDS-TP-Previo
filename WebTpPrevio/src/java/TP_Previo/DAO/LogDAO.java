@@ -13,25 +13,38 @@ import org.json.simple.JSONObject;
 
 
 public class LogDAO {
+   
     
-    public static void GrabarLog(String usuario, Date fechaHora, String actividad, String resultado) 
+    public static void GrabarLog(String usuario, Date fechaHora, String actividad, String resultado)
     {
-              {
-        String strLogFileName = "C:\\Temp\\logs\\AccessLog.json";
-        
+        String strLogFileName = "C:\\Log.json";
+                
         JSONObject obj = new JSONObject();
         obj.put("usuario", usuario);
         obj.put("fechaHora", fechaHora);
         obj.put("actividad", actividad);
         obj.put("resultado", resultado);
         
-        try (FileWriter file = new FileWriter(strLogFileName,true)) {
+      /*  try (FileWriter file = new FileWriter(strLogFileName,true)) {
             file.write(obj.toJSONString());
-            file.write("\r\n");
-            file.flush();
+            file.write("\r\n");     //--- Hace que salte de linea
+            file.flush();           //--- Fuerza a que grabe a Disco
         } catch (IOException e) {
             e.printStackTrace();
-        }    
+        } */
+        try{
+            File archivo = new File(strLogFileName);
+             try (FileWriter escribir = new FileWriter(archivo,true)) {
+                escribir.write(obj.toJSONString());
+                escribir.write("\r\n");     //--- Hace que salte de linea
+                escribir.flush();           //--- Fuerza a que grabe a Disco
+             }
+          }
+            catch (IOException e){
+                System.out.println("Error al escribir el archivo json");
+            }
+    }
 
+    
+    
 }
-}}
