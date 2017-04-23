@@ -57,7 +57,7 @@ public class CambiarClaveControllerServlet extends HttpServlet {
 
             //--- Graba el LOG de accesos
             //--- (utiliza un if en linea para definir el resultado)
-            LogDAO.GrabarLog(strUserName, new Date(), "Cambio de Clave", (modifica ? "Permitdo" : "Denegado"));          
+            LogDAO.GrabarLog(strUserName, new Date(), "Cambio de Clave", (modifica ? "Exitoso" : "Denegado"));          
 
             //--- Determina la acción en base a la existencia
             if(modifica){

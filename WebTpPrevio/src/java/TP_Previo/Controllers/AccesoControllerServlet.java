@@ -63,7 +63,7 @@ public class AccesoControllerServlet extends HttpServlet {
 
             //--- Graba el LOG de accesos
             //--- (utiliza un if en linea para definir el resultado)
-            LogDAO.GrabarLog(strUserName, new Date(), "Acceso", (existe ? "Permitdo" : "Denegado"));          
+            LogDAO.GrabarLog(strUserName, new Date(), "Acceso", (existe ? "Permitido" : "Denegado"));          
 
             //--- Determina la acci�n en base a la existencia
             if(existe){
