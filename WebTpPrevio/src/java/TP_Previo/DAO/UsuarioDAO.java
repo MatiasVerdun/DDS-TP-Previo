@@ -38,4 +38,29 @@ public class UsuarioDAO {
         }
         return existe;
     }   
+    
+    public boolean ModificarClave(Usuario usuario, String strPasswordNew){
+        try {
+            
+            if (!this.ValidarExistencia(usuario))
+               return false;
+            
+            //--- Se conecta a la base de datos
+            MySqlHelper mySQL = new MySqlHelper();
+            Connection conn = mySQL.getConnection();
+            
+            //--- Prepara la sentencia para validar el Usuario
+            PreparedStatement consultaUsuario = conn.prepareStatement("UPDATE usuarios set contrasena=? where id_usuario = ? AND contrasena=? ");
+            consultaUsuario.setString(1, strPasswordNew);
+            consultaUsuario.setString(2, usuario.getUserName());
+            consultaUsuario.setString(3, usuario.getPassword());
+
+            //--- Ejecuta la consulta
+            consultaUsuario.execute();
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar el usuario");
+        }
+        return true;
+    }   
+    
 }

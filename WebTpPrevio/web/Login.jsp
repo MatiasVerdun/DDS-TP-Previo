@@ -37,6 +37,9 @@
     <input class="button" type="submit"  value="Iniciar Sesión">
     <br>
     <br>
+    <input class="button" type="submit" name="cambioClave" value="Cambiar Contraseña">
+    <br>
+    <br>
   </fieldset>
 </form>
 </body>

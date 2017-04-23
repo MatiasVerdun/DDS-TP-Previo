@@ -8,6 +8,10 @@
         <servlet-name>RegistrarZonaControllerServlet</servlet-name>
         <servlet-class>TP_Previo.Controllers.RegistrarZonaControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CambiarClaveControllerServlet</servlet-name>
+        <servlet-class>TP_Previo.Controllers.CambiarClaveControllerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccesoControllerServlet</servlet-name>
         <url-pattern>/AccesoControllerServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>RegistrarZonaControllerServlet</servlet-name>
         <url-pattern>/RegistrarZonaControllerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CambiarClaveControllerServlet</servlet-name>
+        <url-pattern>/CambiarClaveControllerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

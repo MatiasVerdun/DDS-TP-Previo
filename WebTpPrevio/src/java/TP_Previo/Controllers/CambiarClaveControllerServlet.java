@@ -18,14 +18,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet(name = "AccesoControllerServlet", urlPatterns = {"/AccesoControllerServlet"})
-public class AccesoControllerServlet extends HttpServlet {
+/**
+ *
+ * @author Matias
+ */
+public class CambiarClaveControllerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,19 +40,12 @@ public class AccesoControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out=response.getWriter();  
-          //--- Determina la acción seleccionada
-        if (request.getParameter("cambioClave")!=null)
-        {
-            //
-            RequestDispatcher rd=request.getRequestDispatcher("CambioClave.jsp");  
-            rd.forward(request, response);  
-        }  
-        else{ 
-            //--- Obtiene los datos desde la Vista (Login.jsp)
+        try (PrintWriter out = response.getWriter()) {
+            //--- Obtiene los datos desde la Vista (VambioClave.jsp)
             String strUserName=request.getParameter("Usuario");  
             String strPassword=request.getParameter("Clave");  
-
+            String strPasswordNew=request.getParameter("ClaveNueva");
+            
             //--- Crea el objeto usuario que desde Validar
             Usuario objUsuario=new Usuario();  
             objUsuario.setUserName(strUserName);  
@@ -59,38 +53,19 @@ public class AccesoControllerServlet extends HttpServlet {
 
             //--- Controla si existe el usuario en la Tabla
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            boolean existe = usuarioDAO.ValidarExistencia(objUsuario);
+            boolean modifica = usuarioDAO.ModificarClave(objUsuario, strPasswordNew);
 
             //--- Graba el LOG de accesos
             //--- (utiliza un if en linea para definir el resultado)
-            LogDAO.GrabarLog(strUserName, new Date(), "Acceso", (existe ? "Permitdo" : "Denegado"));          
+            LogDAO.GrabarLog(strUserName, new Date(), "Cambio de Clave", (modifica ? "Permitdo" : "Denegado"));          
 
-            //--- Determina la acci�n en base a la existencia
-            if(existe){
-                //--- Guarda en la Session los datos del Usuario
-                request.getSession().setAttribute("usuarioBean",objUsuario);  
-                //
-                //--- Inicializa el Objeto de Seleccion de Zona y
-                //--- lo guarda en la Session
-                SeleccionZona objSeleccionZona = new SeleccionZona();
-                objSeleccionZona.setId_usuario(strUserName);
-                request.getSession().setAttribute("zonaBean",objSeleccionZona);  
-                //
-                //--- Obtiene el listado de Paises
-                MercadoPagoService mpService = new MercadoPagoService();
-                ArrayList<Pais> paises = mpService.obtenerPaises();
-                //--- Para no acceder continuamente almacena los Paises en la Session
-                request.getSession().setAttribute("paisesBean",paises);
-                //
-                //--- Almacena una lista vacia de Estados
-                ArrayList<Estado> estados = new ArrayList<Estado>();
-                request.setAttribute("estadosBean",estados);  
-                //
-                RequestDispatcher rd=request.getRequestDispatcher("ElegirZona.jsp");  
+            //--- Determina la acción en base a la existencia
+            if(modifica){
+                RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");  
                 rd.forward(request, response);  
             }  
             else{  
-                RequestDispatcher rd=request.getRequestDispatcher("Login-error.jsp");  
+                RequestDispatcher rd=request.getRequestDispatcher("CambioClave-error.jsp");  
                 rd.forward(request, response);  
             }
         }
