@@ -16,14 +16,22 @@ public class LogDAO {
     
     public static void GrabarLog(String usuario, Date fechaHora, String actividad, String resultado) 
     {
+              {
+        String strLogFileName = "C:\\Temp\\logs\\AccessLog.json";
         
         JSONObject obj = new JSONObject();
-        obj.put("usuario", usuario);         
-        obj.put("fechaHora", fechaHora);         
-        obj.put("actividad", actividad);         
+        obj.put("usuario", usuario);
+        obj.put("fechaHora", fechaHora);
+        obj.put("actividad", actividad);
         obj.put("resultado", resultado);
-        JSONWrite.main(obj.toString());
-    }   
+        
+        try (FileWriter file = new FileWriter(strLogFileName,true)) {
+            file.write(obj.toJSONString());
+            file.write("\r\n");
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    
 
 }
-
+}}
