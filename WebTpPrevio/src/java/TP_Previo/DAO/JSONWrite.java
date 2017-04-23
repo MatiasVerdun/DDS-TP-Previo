@@ -9,7 +9,7 @@ import java.io.IOException;
 public class JSONWrite {
     public static void main (String json ){
          try{
-            File archivo = new File("C:\\Users\\Victoria\\Documents\\NetBeansProjects\\DDS-TP-Previo\\WebTpPrevio\\Log.json");
+            File archivo = new File("C:\\Log.json");
              try (FileWriter escribir = new FileWriter(archivo,true)) {
                  escribir.write(json);
              }
